@@ -1,20 +1,20 @@
 <app-nav-bar [userName]="userName"></app-nav-bar>
 <div class="hotel-container">
     <div class="menu-bar">
-        <h3 class="tagline">Choose your favourite one</h3>      
+        <p class="tagline">Обери свій улюблений заклад</p>
         <div class="filters">
             <app-search-bar (searchQueryEvent)="searchQuery($event)"></app-search-bar>
             <app-dropdown [selectedValue]="selectedValue" [sortOptions]="sortOptions" (sortEvent)="sortHotels($event)"></app-dropdown>
         </div>
     </div>
 
-    
-    
+
+
     <div class="hotel-cards" [class]="{'empty-search': !hotels.length}" *ngIf="!hotels.length">
         <div class="empty-hotel">
             <mat-spinner *ngIf="!hotelsConstant.length"></mat-spinner>
             <h3 *ngIf="hotelsConstant.length">
-                No Hotels found!
+                Готелів не знайдено!
             </h3>
         </div>
     </div>

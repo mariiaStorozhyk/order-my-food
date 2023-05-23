@@ -13,24 +13,24 @@ export class LoginComponent implements OnInit {
 
   public loginUser;
 
-  constructor(private router: Router, private _authService: AuthService, private _hotelService: HotelService) { }
+  constructor(private router: Router, private authService: AuthService, private hotelService: HotelService) { }
 
   customError = (statusText, statusMessage) => {
     return {
-      statusText: statusText,
+      statusText,
       message: statusMessage
-    }
+    };
   }
 
-  openLoginModal = async() => {
+  openLoginModal = async () => {
     await Swal.fire({
       icon: 'info',
-      title: 'Login into your account',
+      title: 'Вхід',
       html:
-      '<input id="email" type="email" class="swal2-input" autocomplete="off" placeholder="email" required>' +
-      '<input id="password" type="password" class="swal2-input" autocomplete="off" placeholder="password" required>' +
-      '<b>New User?</b>&nbsp' +
-      '<a href="/register">Click here to register</a> ',
+      '<input id="email" type="email" class="swal2-input" autocomplete="off" placeholder="Email" required>' +
+      '<input id="password" type="password" class="swal2-input" autocomplete="off" placeholder="Пароль" required>' +
+      '<b>Новий користувач?</b> <br>' +
+      '<a href="/register">Натисніть тут для реєстрації</a> ',
       focusConfirm: false,
       confirmButtonColor: '#9c27b0',
       allowOutsideClick: false,
@@ -39,56 +39,53 @@ export class LoginComponent implements OnInit {
           this.loginUser = {
             email: (document.getElementById('email') as HTMLInputElement).value,
             password: (document.getElementById('password') as HTMLInputElement).value
-          }
+          };
       }
     }).then((result) => {
       if (result.isConfirmed) {
-        if(!this.loginUser.email || !this.loginUser.password) {
-          const error = this.customError("Missing username or password!", "Please enter all the fields");
+        if (!this.loginUser.email || !this.loginUser.password) {
+          const error = this.customError('Здається не вистачає імені користувача або паролю', 'Будь ласка, заповніть всі поля');
           this.showError(error);
         }
         else {
-          this._authService.login(this.loginUser).subscribe(
+          this.authService.login(this.loginUser).subscribe(
             (res) => {
               this.redirectToHomePage();
               localStorage.setItem('order-my-food-token', res.token);
               localStorage.setItem('order-my-food-username', res.username);
               localStorage.setItem('order-my-food-email', res.email);
               localStorage.setItem('order-my-food-userId', res.userId);
-              this.router.navigateByUrl("/hotels");
+              this.router.navigateByUrl('/hotels');
             },
             (error) => {
-              if(error.statusText == 'Unauthorized') {
-                const error = this.customError("Invalid Username or Password", "Please enter valid credentials");
-                this.showError(error);
+              if (error.statusText === 'Unauthorized') {
+                this.showError(this.customError('Невірне імʼя користувача або пароль', 'Будь ласка, введіть вірні дані'));
               }
-              if(error.error == "Email doesn't exist!") {
-                const error = this.customError("Email doesn't exist!", "Please enter valid credentials");
-                this.showError(error);
+              if (error.error === 'Email doesn\'t exist!') {
+                this.showError(this.customError('Такий email не існує', 'Будь ласка, введіть вірні дані'));
               }
-              if(error.error == "Incorrect Password!") {
-                const error = this.customError("Incorrect Password!", "Please enter valid credentials");
-                this.showError(error);
+              if (error.error === 'Incorrect Password!') {
+                this.showError(this.customError('Невірний пароль!', 'Будь ласка, введіть вірні дані'));
               }
             }
-          )
+          );
         }
       }
-    })
+    });
   }
 
   redirectToHomePage = () => {
     Swal.fire({
       icon: 'success',
-      title: 'Logged in successfully',
-      html: 'Redirecting to the dashboard...',
+      title: 'Вхід виконано успішно',
+      html: 'Завантажується головна сторінка...',
       timer: 3000,
       timerProgressBar: true,
       showConfirmButton: false,
       willOpen: () => {
         Swal.showLoading();
       }
-    }).then((result) => { })
+    }).then((result) => { });
   }
 
   showError = (error) => {
@@ -97,7 +94,7 @@ export class LoginComponent implements OnInit {
       title: error.statusText,
       text: error.message,
       showConfirmButton: true,
-      confirmButtonText: "Try Again",
+      confirmButtonText: 'Повернутися до входу',
       confirmButtonColor: '#9c27b0',
       allowOutsideClick: false,
       allowEscapeKey: false,
@@ -105,7 +102,7 @@ export class LoginComponent implements OnInit {
       if (result.isConfirmed) {
         this.openLoginModal();
       }
-    })
+    });
   }
 
   ngOnInit(): void {

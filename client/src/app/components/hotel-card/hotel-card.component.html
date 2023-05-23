@@ -1,15 +1,17 @@
 <mat-card>
     <mat-card-header>
-      <div mat-card-avatar [ngStyle]="{'background-image': 'url(' + hotelThumbnail + ')'}"></div>
+      <div mat-card-avatar class="mat-card-avatar" [ngStyle]="{'background-image': 'url(' + hotelThumbnail + ')'}"></div>
       <mat-card-title  title="{{hotelName}}">{{hotelName}}</mat-card-title>
       <mat-card-subtitle  title="{{cuisines}}">{{cuisines}}</mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image width="400" height="300" src="{{hotelThumbnail}}" alt="Hotel {{hotelName}}">
+    <div class="mat-card-image-conatiner">
+      <img mat-card-image  src="{{hotelImage}}" alt="Hotel {{hotelName}}">
+    </div>
     <mat-card-content>
-      <p>Rating: <span class="rating-star">{{'★'.repeat(math.round(rating))}}</span></p>
-      <p>Review: {{review}}</p>
+      <p>Рейтинг: <span class="rating-star">{{'★'.repeat(math.round(rating))}}</span></p>
+      <p>Відгуки: {{review}}</p>
     </mat-card-content>
     <mat-card-actions>
-        <button mat-raised-button color="warn">Order Now</button>
+        <button mat-raised-button color="warn">Замовити</button>
     </mat-card-actions>
   </mat-card>

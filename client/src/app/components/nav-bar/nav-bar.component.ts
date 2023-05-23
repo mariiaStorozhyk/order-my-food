@@ -13,7 +13,7 @@ export class NavBarComponent implements OnInit {
 
   @Input() public userName;
 
-  constructor(private router: Router, private _authService: AuthService) { }
+  constructor(private router: Router, private authService: AuthService) { }
 
   goToHome = () => {
     this.router.navigateByUrl("/hotels");
@@ -26,8 +26,8 @@ export class NavBarComponent implements OnInit {
   redirectToLoginPage = () => {
     Swal.fire({
       icon: 'success',
-      title: 'Logging out',
-      html: 'Redirecting to the login page...',
+      title: 'Вихід',
+      html: 'Переходимо на сторінку входу...',
       timer: 3000,
       timerProgressBar: true,
       showConfirmButton: false,
@@ -35,8 +35,8 @@ export class NavBarComponent implements OnInit {
         Swal.showLoading();
       }
     }).then((result) => {
-      this._authService.logoutUser();
-    })
+      this.authService.logoutUser();
+    });
   }
 
 

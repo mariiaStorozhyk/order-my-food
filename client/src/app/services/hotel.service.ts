@@ -23,7 +23,7 @@ export class HotelService {
   public customError = {
     status: 500,
     message: 'Sorry! Something went wrong :('
-  }
+  };
 
   orderHistoryChange: Subject<any> = new Subject<any>();
 
@@ -50,7 +50,7 @@ export class HotelService {
     });
     this.orderHistoryChange.subscribe((orderHist) => {
       this.orderHistory = orderHist;
-    })
+    });
   }
 
   public getHotels = (): Observable<IHotel[]> => {
@@ -103,11 +103,11 @@ export class HotelService {
   }
 
   public setOrderHistory = (orderHist) => {
-    this.orderHistoryChange.next(orderHist)
+    this.orderHistoryChange.next(orderHist);
   }
 
   public removeCartItem = (item) => {
-    this.cartItems = this.cartItems.filter((menu) => menu.id != item.id);
+    this.cartItems = this.cartItems.filter((menu) => menu.id !== item.id);
   }
 
   public clearAllCartItems = () => {

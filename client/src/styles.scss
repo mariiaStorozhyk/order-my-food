@@ -2,7 +2,7 @@
 @import '~@angular/material/theming';
 
 $custom-typography: mat-typography-config(
-    $font-family: '"Dosis", sans-serif;',
+    $font-family: '"Montserrat", sans-serif;',
     $subheading-2: mat-typography-level(20px, 32px, 600)
     );
 @include mat-core($custom-typography);
@@ -10,7 +10,17 @@ $custom-typography: mat-typography-config(
 html, body {
     margin: 0;
     padding: 0;
-    font-family: 'Dosis', sans-serif !important;
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+button {
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+.tagline {
+  font-size: 27px;
+  padding-left: 2rem;
+  text-transform: uppercase;
 }
 
 /* width */
@@ -20,13 +30,13 @@ html, body {
 
 /* Track */
 ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px grey; 
+    box-shadow: inset 0 0 5px grey;
     border-radius: 5px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: #660f75; 
+    background: #660f75;
     border-radius: 5px;
 }
 

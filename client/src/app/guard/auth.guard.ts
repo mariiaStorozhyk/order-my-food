@@ -8,10 +8,10 @@ import { HotelService } from '../services/hotel.service';
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(private _authService: AuthService, private _router: Router, private _hotelService: HotelService) { }
+  constructor(private authService: AuthService, private _router: Router, private _hotelService: HotelService) { }
 
   canActivate(): boolean {
-    if(this._authService.isAuthenticatedUser()) {
+    if (this.authService.isAuthenticatedUser()) {
       let userName = localStorage.getItem('order-my-food-username');
       let email = localStorage.getItem('order-my-food-email');
       let userId = localStorage.getItem('order-my-food-userId');
@@ -24,5 +24,5 @@ export class AuthGuard implements CanActivate {
       return false
     }
   }
-  
+
 }

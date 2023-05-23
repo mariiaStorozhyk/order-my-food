@@ -1,5 +1,5 @@
 <div class="menus-container">
-    <h3 class="menu-header">Order Now</h3>
+    <h3 class="menu-header">Замовити зараз</h3>
     <mat-card class="menu" *ngFor="let menu of hotel.menu">
         <mat-card-header>
             <mat-card-title>{{menu.name}}</mat-card-title>
@@ -10,9 +10,9 @@
         </p>
         </mat-card-content>
         <mat-card-actions>
-            <span>{{'\u20B9'}} {{menu.price}}</span>
+            <span>{{'\u20B4'}} {{menu.price}}</span>
             <button mat-raised-button class="order" (click)="addToMyCart(menu)">
-                Add to Cart
+                Додати в кошик
             </button>
         </mat-card-actions>
     </mat-card>

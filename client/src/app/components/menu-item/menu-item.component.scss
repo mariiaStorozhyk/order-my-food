@@ -5,6 +5,7 @@
     align-items: center;
     .menu-header {
         padding: 1%;
+        font-weight: 400;
     }
     .menu {
         margin-bottom: 2%;
@@ -20,7 +21,6 @@
         }
         mat-card-content {
             p {
-                text-indent: 3%;
                 font-size: 19px;
                 padding-left: 2%;
                 line-height: 30px;
@@ -55,5 +55,5 @@ h3 {
 }
 
 mat-card-title {
-    font-weight: 600;
+    font-weight: 500;
 }

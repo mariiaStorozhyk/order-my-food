@@ -20,10 +20,10 @@
                         <mat-icon class="shopping-history" (click)="getOrderHistory()" title="Order History">history</mat-icon>
                         <mat-icon matBadge="{{cartItems.length}}" matBadgeColor="warn" class="shopping-cart" (click)="toggleSideNav(true); scrollTop()" *ngIf="cartItems.length" title="Your Basket">shopping_cart</mat-icon>
                         <mat-icon class="shopping-cart" (click)="toggleSideNav(true)" *ngIf="!cartItems.length" title="Your Basket">shopping_cart</mat-icon>
-                    </div> 
+                    </div>
                 </div>
                 <div class="hotel-menus">
-                    <app-menu-item [hotel]="hotel" (addToMyCartEvent)="addToMyCart($event)" 
+                    <app-menu-item [hotel]="hotel" (addToMyCartEvent)="addToMyCart($event)"
                     [class]="{'apply-felx-basis': cartItems.length}"></app-menu-item>
                     <mat-divider [vertical]="true"></mat-divider>
                 </div>
@@ -32,21 +32,21 @@
         <mat-sidenav #sidenav [mode]="toggleMode" position="end" [opened]="false">
             <div class="cart-items-sidenav" *ngIf="!showOrderHistory">
                 <div class="price-container" *ngIf="!cartItems.length">
-                    <h3>My Basket</h3>
+                    <h3>Мій кошик</h3>
                     <p class="empty-basket">
-                        Your basket is empty. Please add items to your basket.
+                        Ваш кошик пустий. Будь ласка, додайте до нього позиції.
                     </p>
                 </div>
                 <div class="price-container" *ngIf="cartItems.length">
-                    <h3>My Basket</h3>
+                    <h3>Мій кошик</h3>
                     <div class="cart-items">
                         <app-cart-item [cartItems]="cartItems" (removeQuantityEvent)="removeQuantity($event)"
                         (addQuantityEvent)="addQuantity($event)" (removeItemEvent)="removeItem($event)"></app-cart-item>
-                        
+
                     </div>
-                    <div class="amount" *ngIf="cartItems.length"> Bill Amount: {{'\u20B9'}} {{totalAmount}}</div>
+                    <div class="amount" *ngIf="cartItems.length"> Сума до сплати: {{'\u20B9'}} {{totalAmount}}</div>
                     <button mat-raised-button color="warn" class="calculate-menu" *ngIf="cartItems.length && totalAmount" (click)="openPaymentMethod()">
-                        Pay Bill
+                        Оплатити
                     </button>
                 </div>
             </div>
@@ -54,11 +54,11 @@
                 <div class="price-container" *ngIf="!ordersHistory.orders?.length">
                     <h3>Order History</h3>
                     <p class="empty-basket">
-                        You don't have any order history.
+                        У Вас немає історії замовлень
                     </p>
                 </div>
                 <div class="price-container" *ngIf="ordersHistory.orders?.length">
-                    <h3>Order History</h3>
+                    <h3>Історія замовлень</h3>
                     <div class="history-order-items" *ngFor="let order of ordersHistory.orders">
                         <h4 class="order-date">{{order.orderDate | date}}</h4>
                         <mat-card class="history-order-card" *ngFor="let menu of order.menu">
@@ -66,13 +66,13 @@
                             <mat-card-title  title="{{menu.name}}">{{menu.quantity}} X {{menu.name}}</mat-card-title>
                             </mat-card-header>
                             <mat-card-content>
-                            <p> <span class="fade-title">Ordered At:</span> {{menu.hotel}}</p>
-                            <p> <span class="fade-title">Total Amount:</span> {{'\u20B9'}} {{menu.quantity*menu.price}}</p>
-                            <button mat-raised-button color="warn" (click)="addToMyCart(menu); toggleSideNav(true);">Buy Again</button>
+                            <p> <span class="fade-title">Замовлено в:</span> {{menu.hotel}}</p>
+                            <p> <span class="fade-title">Закальна сума:</span> {{'\u20B9'}} {{menu.quantity*menu.price}}</p>
+                            <button mat-raised-button color="warn" (click)="addToMyCart(menu); toggleSideNav(true);">Придбати ще раз</button>
                             </mat-card-content>
                         </mat-card>
-                        
-                        <h4> Amount Paid: {{'\u20B9'}} {{order.amountPaid}}</h4>
+
+                        <h4> Сума: {{'\u20B9'}} {{order.amountPaid}}</h4>
                         <mat-divider></mat-divider>
                         <mat-divider></mat-divider>
                     </div>

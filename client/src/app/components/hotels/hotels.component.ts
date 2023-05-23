@@ -10,36 +10,35 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
   styleUrls: ['./hotels.component.scss']
 })
 export class HotelsComponent implements OnInit {
-  
   public hotels = [];
   public hotelsConstant = [];
   public userName = '';
 
   sortOptions: ISortOption[] = [
-    {value: 'name', viewValue: 'Name'},
-    {value: 'rating', viewValue: 'Rating'},
-    {value: 'reviews', viewValue: 'Review'}
+    {value: 'name', viewValue: 'Назва'},
+    {value: 'rating', viewValue: 'Рейтинг'},
+    {value: 'reviews', viewValue: 'Відгуки'}
   ];
 
   selectedValue = this.sortOptions[0].value; // default sorting
 
-  constructor(private _hotelService: HotelService, private router: Router) { }
+  constructor(private hotelService: HotelService, private router: Router) { }
 
-  inputName = async() => {
+  inputName = async () => {
     await Swal.fire({
-      title: 'Your name?',
-      text: "We keep your name confidential!",
+      title: 'Ваше імʼя?',
+      text: 'Ваше імʼя залишиться конфіденційним',
       input: 'text',
       confirmButtonColor: '#9c27b0',
       allowOutsideClick: false,
       allowEscapeKey: false,
       inputValidator: (value) => {
         if (!value) {
-          return 'Please enter your name!'
+          return 'Будь ласка, введіть Ваше імʼя';
         }
         else {
-          this._hotelService.setUserName(value);
-          this.userName = this._hotelService.userName;
+          this.hotelService.setUserName(value);
+          this.userName = this.hotelService.userName;
         }
       }
     });
@@ -52,14 +51,14 @@ export class HotelsComponent implements OnInit {
   sortHotels = (selectedValue) => {
 
     if (selectedValue === 'rating'){
-      this.hotels = this.hotels.sort((a,b) => {
-        return b.rating - a.rating
+      this.hotels = this.hotels.sort((a, b) => {
+        return b.rating - a.rating;
       });
     }
 
     else if (selectedValue === 'reviews'){
-      this.hotels = this.hotels.sort((a,b) => {
-        return b.reviews - a.reviews
+      this.hotels = this.hotels.sort((a, b) => {
+        return b.reviews - a.reviews;
       });
     }
 
@@ -68,17 +67,17 @@ export class HotelsComponent implements OnInit {
         // case-insensitive comparison
         a = a.toLowerCase();
         b = b.toLowerCase();
-      
+
         return (a < b) ? -1 : (a > b) ? 1 : 0;
       }
-      this.hotels = this.hotels.sort((a,b) => {
-        return compareName(a.name, b.name)
+       this.hotels = this.hotels.sort((a, b) => {
+        return compareName(a.name, b.name);
       });
     }
   }
 
   goToHotel = (hotel) => {
-    this.router.navigate(['/hotels', hotel.id])
+    this.router.navigate(['/hotels', hotel.id]);
   }
 
   showError = (error) => {
@@ -93,14 +92,14 @@ export class HotelsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._hotelService.getHotels().subscribe(
+    this.hotelService.getHotels().subscribe(
       (data) => {
         this.hotelsConstant = this.hotels = data;
         this.sortHotels(this.selectedValue);
-        this.userName = this._hotelService.userName;
+        this.userName = this.hotelService.userName;
       },
       (error) => {
-        if(error.status === 401) {
+        if (error.status === 401) {
           this.router.navigateByUrl('/login');
         }
         else {
