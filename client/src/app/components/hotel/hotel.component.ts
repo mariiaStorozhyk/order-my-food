@@ -205,11 +205,11 @@ export class HotelComponent implements OnInit, AfterViewInit {
     this.sidenavService.setSidenav(this.sidenav);
   }
 
-  async ngOnInit() {
+  async ngOnInit(): Promise<void> {
     this.scrollTop();
 
     this.route.paramMap.subscribe((params: ParamMap) => {
-      this.hotelId =  parseInt(params.get('id'));
+      this.hotelId =  parseInt(params.get('id'), 10);
     });
 
     this.hotelService.getHotel(this.hotelId).subscribe((data) => {

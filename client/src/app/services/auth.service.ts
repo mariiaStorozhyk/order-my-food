@@ -14,19 +14,19 @@ export class AuthService {
 
   private registerURL: string = (environment.baseURL) ? `${environment.baseURL}api/register` : 'api/register';
   private loginURL: string = (environment.baseURL) ? `${environment.baseURL}api/login` : 'api/login';
-  private isUserLoggedIn: boolean = false;
+  private isUserLoggedIn = false;
 
   userLogStatusChange: Subject<boolean> = new Subject<boolean>();
 
   public customError = {
     status: 500,
     message: 'Sorry! Something went wrong :('
-  }
+  };
 
-  constructor(private httpClient: HttpClient, private _router: Router) {
+  constructor(private httpClient: HttpClient, private router: Router) {
     this.userLogStatusChange.subscribe((value) => {
       this.isUserLoggedIn = value;
-    })
+    });
   }
 
   public register = (user: IRegisterUser): Observable<any> => {
@@ -66,7 +66,7 @@ export class AuthService {
     localStorage.removeItem('order-my-food-username');
     localStorage.removeItem('order-my-food-email');
     localStorage.removeItem('order-my-food-userId');
-    this._router.navigateByUrl('/login');
+    this.router.navigateByUrl('/login');
   }
 
 }

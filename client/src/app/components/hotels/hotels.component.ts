@@ -63,14 +63,14 @@ export class HotelsComponent implements OnInit {
     }
 
     else if (selectedValue === 'name'){
-       function compareName (a, b)  {
-        // case-insensitive comparison
+      function compareName(a: string, b: string): number {
         a = a.toLowerCase();
         b = b.toLowerCase();
 
         return (a < b) ? -1 : (a > b) ? 1 : 0;
       }
-       this.hotels = this.hotels.sort((a, b) => {
+
+      this.hotels = this.hotels.sort((a, b) => {
         return compareName(a.name, b.name);
       });
     }

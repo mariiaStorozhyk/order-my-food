@@ -16,11 +16,11 @@ export class NavBarComponent implements OnInit {
   constructor(private router: Router, private authService: AuthService) { }
 
   goToHome = () => {
-    this.router.navigateByUrl("/hotels");
+    this.router.navigateByUrl('/hotels');
   }
 
   logoutUser = () => {
-    this.redirectToLoginPage()
+    this.redirectToLoginPage();
   }
 
   redirectToLoginPage = () => {

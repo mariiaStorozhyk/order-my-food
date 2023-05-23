@@ -11,12 +11,12 @@ export class TokenInterceptorService implements HttpInterceptor {
   constructor(private authService: AuthService) { }
 
   intercept = (req, next) => {
-    let authToken = this.authService.getAuthToken();
-    let tokenizedReq = req.clone({
+    const authToken = this.authService.getAuthToken();
+    const tokenizedReq = req.clone({
       setHeaders: {
         Authorization: `Bearer ${authToken}`
       }
-    })
+    });
     return next.handle(tokenizedReq);
   }
 }
